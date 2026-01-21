@@ -1,5 +1,5 @@
 ---
-title: "CoreyHomework"
+title: "Corey's Homework"
 ---
 
 ## Homework 1
