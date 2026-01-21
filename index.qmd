@@ -2,6 +2,8 @@
 title: "CoreyHomework"
 ---
 
-This is a Quarto website.
-
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+## Homework 1
+```{r}
+a <- 2 + 3
+a
+```

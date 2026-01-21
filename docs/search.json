@@ -11,6 +11,13 @@
     "href": "index.html",
     "title": "CoreyHomework",
     "section": "",
-    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites."
+    "text": "a &lt;- 2 + 3\na\n\n[1] 5"
+  },
+  {
+    "objectID": "index.html#homework-1",
+    "href": "index.html#homework-1",
+    "title": "CoreyHomework",
+    "section": "",
+    "text": "a &lt;- 2 + 3\na\n\n[1] 5"
   }
 ]
