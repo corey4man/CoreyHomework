@@ -107,3 +107,139 @@ z + y
 # Recycling
 x <- c(1, 2)
 z + x
+
+#################################
+# Atomic Vecs Part II
+
+z <- vector(mode = "numeric", length = 0) #Empty vector
+print(z)
+#Dynamic creation, will do in Python but not in R because R creates them exponentially and Python is linear
+z <- c(z, 5)
+print(z) 
+
+# Predefined Length
+## Empty vectors - 2 methods
+z <- rep(0, 100)
+print(z)
+length(z)
+
+z <- rep(NA, 100)
+z
+
+typeof(z)
+
+z[1] <- "Vermont"
+head(z)
+typeof(z)
+
+my_vector <- runif(100)
+my_names <- paste("Species", seq(1:length(my_vector)), sep="")
+print(my_names)
+
+names(my_vector) <- my_names
+head(my_vector)
+str(my_vector)
+
+# using the rep function
+rep(0.5, 6)
+rep(x = 0.5, times = 6) #same thing but more readable
+
+my_vec <- c(1,2,3)
+
+# repeat a vector
+rep(x = my_vec, times = 2, each = 2)
+
+# sequencing vectors
+seq(from = 2, to = 4)
+2:4
+
+x <- seq(from = 2, to = 4, length = 7)
+
+my_vec <- 1:length(x) #common in other languages but slow in R
+my_vec
+
+#better in R
+seq_along(my_vec)
+
+#generating random vectors
+
+runif(5) #gives us 5 values 0 to 1
+
+#the params
+runif(n=3, min=100, max=101)
+
+set.seed(123) #takes any number
+
+#gives you the same progression of random nums
+runif(n=1, min=0, max=1)
+
+# normal distribution
+out <- rnorm(n = 500, mean = 100, sd = 30) #randomly sampling from this distribution
+hist(out)
+
+# random sampling
+
+long_vec <- seq_len(10)
+sample(x = long_vec, size = 100, replace = T)
+
+# weighted sampling from a vec
+weights <- c(rep(20, 5), rep(100, 5))
+weights
+
+sample(x = long_vec, replace=TRUE, prob=weights)
+
+#subsetting vectors
+z <- c(3.1, 9.2, 1.3, 0.4, 7.5)
+z
+z[1]
+z[-1]
+
+z[c(2,3)]
+
+z[-c(2,3)] #using vecs to slice
+
+#using logicals
+z[z<3]
+z[!z<3] #! means not, so this means greater than 3
+
+#relational operators
+# < > <= >= ==
+
+#logical operators
+# ! not, & and (vector), | or (vector), xor(x,y) (xor means either x or y is true, only wants one to be true)
+
+x <- 1:5
+y <- c(1:3,7,7)
+
+x == 2
+x != 2
+
+x == 1 & y == 7
+x == 5 & y == 7
+
+x == 1 | y == 7
+x == 3 | y == 3
+
+x == 3 & y == 3
+
+xor(x==3, y==3)
+xor(x==3, y==5)
+
+#missing values
+set.seed(90)
+z <- runif(10)
+
+z< 0.5
+z[z < 0.5]
+which(z < 0.5) #gives index of where values are
+which(z < 0.5)
+
+zd <- c(z, NA, NA)
+zd
+
+zd[zd <0.5]
+
+#dropping NAs with which to index
+zd[which(zd < 0.5)]
+
+zd[11]
