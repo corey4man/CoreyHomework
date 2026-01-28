@@ -2,8 +2,11 @@
 title: "Corey's Homework"
 ---
 
-## Homework 1
+## Homework 2
 ```{r}
 a <- 2 + 3
 a
 ```
+
+## Homework 3
+
