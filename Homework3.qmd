@@ -1,5 +1,6 @@
-# Homework 3
-## 1
+---
+title: "Homework 3"
+---
 ```{r}
 # Setting variables
 x <- 1.1
