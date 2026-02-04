@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>homework3 – Corey's Homework</title>
+<title>Homework 3 – Corey’s Homework</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -236,7 +236,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#5</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>ints <span class="ot">&lt;-</span> (<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>)</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>newints <span class="ot">&lt;-</span> ints[<span class="fu">which</span>(ints<span class="sc">%%</span><span class="dv">2</span> <span class="sc">!=</span><span class="dv">0</span> <span class="sc">&amp;</span> ints<span class="sc">%%</span><span class="dv">3</span> <span class="sc">!=</span><span class="dv">0</span> <span class="sc">&amp;</span> ints<span class="sc">%%</span><span class="dv">7</span> <span class="sc">!=</span><span class="dv">0</span>)]</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Included only numbers that have a nonzero remainder when divided by 2,3, or 7</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Included only numbers that have a nonzero remainder when divided by 2,3, or 7</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(newints)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]  1  5 11 13 17 19 23 25 29 31 37 41 43 47 53 55 59 61 65 67 71 73 79 83 85
+[26] 89 95 97</code></pre>
+</div>
 </div>
 
 

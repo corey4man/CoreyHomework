@@ -55,4 +55,5 @@ which(queue == "aphid")
 ints <- (1:100)
 newints <- ints[which(ints%%2 !=0 & ints%%3 !=0 & ints%%7 !=0)]
 # Included only numbers that have a nonzero remainder when divided by 2,3, or 7
-```
+print(newints)
+`
