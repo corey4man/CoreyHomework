@@ -1,0 +1,66 @@
+---
+title: "Homework 5"
+---
+
+
+```{r, message = FALSE}
+# Question 1
+
+# START OF FUNCTION 
+#######################################################################
+log_growth <- function(N0 = 5, r = .1, K = 100, tfinal = 100, tstep = 5){
+
+#######################################################
+# FUNCTION: log_growth
+# PURPOSE: runs a logistic growth model
+# INPUTS: initial population size (N0), growth rate(r), carrying capacity (K), end time for time vector (tfinal), timestep for time vector (tstep)
+# OUT: dataframe with population size and time
+
+times <- seq(from = 0, to = tfinal, by = tstep)
+
+logdf <- data.frame(times, popsize = NA)
+
+for (t in 1:length(times)){
+    time <- logdf$times[t]
+n <- (K/
+    (1+
+    ((K-N0)/N0)*exp((-r)*time)))
+logdf$popsize[t] = n
+}
+
+return(logdf)
+}
+########################################################################
+# END FUNCTION
+log_results <- log_growth()
+
+log_growth()
+
+# Question 2
+
+# START OF FUNCTION 
+#######################################################################
+plot_growth <- function(logdf = log_results){
+library(tidyverse)
+#######################################################
+# FUNCTION: plot_growth
+# PURPOSE: Takes log_growth dataframe and creates plot of population size over time
+# INPUTS: dataframe from log_growth
+# OUT: dataframe with population size and time
+
+ggplot(
+        data = logdf,
+        mapping = aes(
+            x = times,
+            y = popsize
+        )
+    ) + geom_point() + geom_line() + xlab("Times") + ylab("Population Size")
+
+}
+
+########################################################################
+# END FUNCTION
+
+plot_growth()
+
+```
