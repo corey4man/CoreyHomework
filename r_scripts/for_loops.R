@@ -357,7 +357,7 @@ stor_mat <- matrix(NA, nrow = length(r_values), ncol = length(K_values))
 
 
 # run log growth
-tmp_df <- log_growth(r = r_values[i], K = K_values[j])
+tmp_df <- growth_sweep(r = r_values[i], K = K_values[j])
   
   counter
 
