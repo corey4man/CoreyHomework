@@ -1,5 +1,75 @@
 [
   {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Corey’s Homework",
+    "section": "",
+    "text": "a &lt;- 2 + 3\na\n\n[1] 5"
+  },
+  {
+    "objectID": "index.html#homework-2",
+    "href": "index.html#homework-2",
+    "title": "Corey’s Homework",
+    "section": "",
+    "text": "a &lt;- 2 + 3\na\n\n[1] 5"
+  },
+  {
+    "objectID": "index.html#homework-3",
+    "href": "index.html#homework-3",
+    "title": "Corey’s Homework",
+    "section": "Homework 3",
+    "text": "Homework 3\nHomework 3"
+  },
+  {
+    "objectID": "index.html#homework-4",
+    "href": "index.html#homework-4",
+    "title": "Corey’s Homework",
+    "section": "Homework 4",
+    "text": "Homework 4\nHomework 4"
+  },
+  {
+    "objectID": "index.html#homework-5",
+    "href": "index.html#homework-5",
+    "title": "Corey’s Homework",
+    "section": "Homework 5",
+    "text": "Homework 5\nHomework 5"
+  },
+  {
+    "objectID": "index.html#homework-6",
+    "href": "index.html#homework-6",
+    "title": "Corey’s Homework",
+    "section": "Homework 6",
+    "text": "Homework 6\nHomework 6"
+  },
+  {
+    "objectID": "Homework5.html",
+    "href": "Homework5.html",
+    "title": "Homework 5",
+    "section": "",
+    "text": "# Question 1\n\n# START OF FUNCTION \n#######################################################################\nlog_growth &lt;- function(N0 = 5, r = .1, K = 100, tfinal = 100, tstep = 5){\n\n#######################################################\n# FUNCTION: log_growth\n# PURPOSE: runs a logistic growth model\n# INPUTS: initial population size (N0), growth rate(r), carrying capacity (K), end time for time vector (tfinal), timestep for time vector (tstep)\n# OUT: dataframe with population size and time\n\ntimes &lt;- seq(from = 0, to = tfinal, by = tstep)\n\nlogdf &lt;- data.frame(times, popsize = NA)\n\nfor (t in 1:length(times)){\n    time &lt;- logdf$times[t]\nn &lt;- (K/\n    (1+\n    ((K-N0)/N0)*exp((-r)*time)))\nlogdf$popsize[t] = n\n}\n\nreturn(logdf)\n}\n########################################################################\n# END FUNCTION\nlog_results &lt;- log_growth()\n\nlog_growth()\n\n   times   popsize\n1      0  5.000000\n2      5  7.984617\n3     10 12.516100\n4     15 19.085889\n5     20 28.000456\n6     25 39.068376\n7     30 51.388668\n8     35 63.542483\n9     40 74.184134\n10    45 82.571547\n11    50 88.650832\n12    55 92.794622\n13    60 95.502201\n14    65 97.222797\n15    70 98.296931\n16    75 98.960068\n17    80 99.366658\n18    85 99.614899\n19    90 99.766070\n20    95 99.857983\n21   100 99.913814\n\n# Question 2\n\n# START OF FUNCTION \n#######################################################################\nplot_growth &lt;- function(logdf = log_results){\nlibrary(tidyverse)\n#######################################################\n# FUNCTION: plot_growth\n# PURPOSE: Takes log_growth dataframe and creates plot of population size over time\n# INPUTS: dataframe from log_growth\n# OUT: dataframe with population size and time\n\nggplot(\n        data = logdf,\n        mapping = aes(\n            x = times,\n            y = popsize\n        )\n    ) + geom_point() + geom_line() + xlab(\"Times\") + ylab(\"Population Size\")\n\n}\n\n########################################################################\n# END FUNCTION\n\nplot_growth()"
+  },
+  {
+    "objectID": "Homework3.html",
+    "href": "Homework3.html",
+    "title": "Homework 3",
+    "section": "",
+    "text": "# Setting variables\nx &lt;- 1.1\na &lt;- 2.2\nb &lt;- 3.3\n\n# 1a\nz &lt;- x^(a^b)\nprint(z)\n\n[1] 3.61714\n\n# 1b\nz &lt;- (x^a)^b\nprint(z)\n\n[1] 1.997611\n\n#1c\nz &lt;- (3*x^3) + (2*x^2) + 1\nprint(z)\n\n[1] 7.413\n\n# 2\n\n# 2a\nvec1 &lt;- c(seq(from=1, to=8), seq(from = 7, to = 1))\nprint(vec1)\n\n [1] 1 2 3 4 5 6 7 8 7 6 5 4 3 2 1\n\n# 2b\nvec2 &lt;- c(1:5)\nrep(x = vec2, times = vec2) # Assigned each number to repeat the same amount of times as its position in the vector\n\n [1] 1 2 2 3 3 3 4 4 4 4 5 5 5 5 5\n\n#2c\nvec3 &lt;- seq(from =5, to =1)\nrep(x = vec3, times = vec2) #Have each number in sequence vec3 repeat the amount of times of its position in vec2\n\n [1] 5 4 4 3 3 3 2 2 2 2 1 1 1 1 1\n\n#3\nset.seed(123)\nnums &lt;- runif(2)\nr &lt;- sqrt((nums[1]^2+nums[2]^2))\n#Used formula for converting x to r by using the positions of the random numbers in the random uniform distribution\ntheta &lt;- atan(nums[2]/nums[1])\n#Used formula for converting y to theta by using the positions of the random numbers in the random uniform distribution\n\n#4\nqueue &lt;- c(\"sheep\", \"fox\", \"owl\", \"ant\")\nqueue &lt;- c(queue, \"serpent\")\nqueue &lt;- queue[-1]\nqueue &lt;- c(\"donkey\", queue)\nqueue &lt;- queue[-5]\nqueue &lt;- queue[-3]\nqueue &lt;- c(queue[1:2], \"aphid\", queue[3])\nwhich(queue == \"aphid\")\n\n[1] 3\n\n#5\nints &lt;- (1:100)\nnewints &lt;- ints[which(ints%%2 !=0 & ints%%3 !=0 & ints%%7 !=0)]\n# Included only numbers that have a nonzero remainder when divided by 2,3, or 7\nprint(newints)\n\n [1]  1  5 11 13 17 19 23 25 29 31 37 41 43 47 53 55 59 61 65 67 71 73 79 83 85\n[26] 89 95 97"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site"
+  },
+  {
+    "objectID": "Homework4.html",
+    "href": "Homework4.html",
+    "title": "Homework 4",
+    "section": "",
+    "text": "# Question 1\n\n#Creating vector\nndims &lt;- sample(3:10, 1)\nprint(ndims)\n\n[1] 4\n\n#Reshuffling values\nnewdims &lt;- sample(1:(ndims^2))\n#Creating matrix\nmat1 &lt;- matrix(data = newdims, nrow = sqrt(length(newdims)))\nprint(mat1)\n\n     [,1] [,2] [,3] [,4]\n[1,]    4   16   10    9\n[2,]    7    8   14   13\n[3,]    1   11   12    2\n[4,]   15    5    3    6\n\n#Transposing matrix\nmat1 &lt;- t(mat1)\nprint(mat1)\n\n     [,1] [,2] [,3] [,4]\n[1,]    4    7    1   15\n[2,]   16    8   11    5\n[3,]   10   14   12    3\n[4,]    9   13    2    6\n\nsum(mat1[1,])\n\n[1] 27\n\nmean(mat1[1,])\n\n[1] 6.75\n\nsum(mat1[sqrt(length(newdims)),])\n\n[1] 30\n\nmean(mat1[sqrt(length(newdims)),])\n\n[1] 7.5\n\neigenmat &lt;- eigen(mat1) \ntypeof(eigenmat$values)\n\n[1] \"complex\"\n\ntypeof(eigenmat$vectors) #They are all complex\n\n[1] \"complex\"\n\n# Question 2\n\n#Creating list\nmy_matrix &lt;- matrix(runif(16), nrow = 4)\nveclog &lt;- runif(100)\nmy_logical &lt;- veclog&gt;.5\nmy_letters &lt;- sample(letters)\n\nnew_list &lt;- list(my_matrix = my_matrix[2,2], my_logical = my_logical[2], my_letters = my_letters[2])\ntypeof(new_list$my_matrix) #checking types of data\n\n[1] \"double\"\n\ntypeof(new_list$my_logical)\n\n[1] \"logical\"\n\ntypeof(new_list$my_letters)\n\n[1] \"character\"\n\nnew_vec &lt;- c(new_list$my_matrix, new_list$my_logical, new_list$my_letters)\ntypeof(new_vec) #Checking data type of new vector, they are all characters\n\n[1] \"character\"\n\n# Question 3\n\n#Creating variables\nmy_unis &lt;- runif(26, min = 0, max= 10)\nmy_letters &lt;- sample(LETTERS)\n#Creating dataframe\ndf1 &lt;- data.frame(my_unis, my_letters)\n#Replacing with NAs\ndf1[(sample(nrow(df1), size = 4, replace = FALSE)),1] &lt;- NA\ndf1\n\n       my_unis my_letters\n1  1.233355890          Y\n2  0.005436966          R\n3  8.776987763          U\n4  2.834888278          H\n5           NA          O\n6  1.420115267          E\n7  3.190556234          G\n8  0.502537226          P\n9  0.492972890          Z\n10 6.951164268          I\n11 8.699087529          M\n12 0.240143372          W\n13 4.653020303          S\n14          NA          K\n15 6.611324449          J\n16 2.612476584          V\n17 8.163108097          F\n18 6.192552277          L\n19 4.953186298          B\n20 8.674169003          N\n21 5.985019708          A\n22          NA          Q\n23          NA          T\n24 4.578935602          C\n25 6.235112001          D\n26 7.306265342          X\n\nwhich(!complete.cases(df1))\n\n[1]  5 14 22 23\n\n#Putting column 2 in alphabetical order\ndf1 &lt;- data.frame(df1[,1], sort(df1[,2]))\nprint(df1)\n\n      df1...1. sort.df1...2..\n1  1.233355890              A\n2  0.005436966              B\n3  8.776987763              C\n4  2.834888278              D\n5           NA              E\n6  1.420115267              F\n7  3.190556234              G\n8  0.502537226              H\n9  0.492972890              I\n10 6.951164268              J\n11 8.699087529              K\n12 0.240143372              L\n13 4.653020303              M\n14          NA              N\n15 6.611324449              O\n16 2.612476584              P\n17 8.163108097              Q\n18 6.192552277              R\n19 4.953186298              S\n20 8.674169003              T\n21 5.985019708              U\n22          NA              V\n23          NA              W\n24 4.578935602              X\n25 6.235112001              Y\n26 7.306265342              Z\n\n#Finding mean of column 1\nmean(df1[,1], na.rm = T)\n\n[1] 4.559655"
+  },
+  {
     "objectID": "Homework6.html",
     "href": "Homework6.html",
     "title": "Homework 6",
