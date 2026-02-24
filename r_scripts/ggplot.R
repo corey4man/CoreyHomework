@@ -104,7 +104,9 @@ p1 + theme_classic(base_size = 35, base_family="Chalkduster")
 
 # coordinate flipping in ggplot
 p2 <- ggplot(data = d, mapping = aes(x=fl, fill=fl)) +
-  geom_bar()
+  geom_bar() +
+  labs(fill = "Fuel Type", x = "Fuel Type", y = "Count") +
+  theme(legend.position = c(.2, .8)) # Could also do like legend.position="Top"
 p2
 
 p2 + coord_flip() + theme_grey(base_size = 20, base_family = "sans")
@@ -116,3 +118,84 @@ p1 <- ggplot(data = d, mapping = aes(x = displ, y = cty)) +
   xlim(0, 8)
   ylim(0, 50)
 p1
+
+###################################################################
+# multi panel plots
+
+library(patchwork)
+library(ggthemes)
+
+g1 <- ggplot(data = d) +
+  aes(x = displ, y = cty) +
+  geom_point() +
+  geom_smooth()
+g1
+
+g2 <- ggplot(data = d) +
+  aes(x = fl) +
+  geom_bar(fill = "tomato", color = "black") # Setting fill with multiple colors automatically makes legend
+g2
+
+g3 <- ggplot(data = d) +
+  aes(x = displ) +
+  geom_histogram(fill = "royalblue", color = "black")
+g3
+
+g4 <- ggplot(data = d) +
+  aes(x = fl, y = cty, fill = fl) +
+  geom_boxplot() +
+  theme(legend.position = "none") # How to remove a legend
+g4
+
+g1 + g2
+
+#plot three plots
+g1 + g2 + g3 + plot_layout(ncol = 1)
+
+# changing area of each plot
+g1 + g2 + plot_layout(ncol = 1, heights = c(2,1)) #Makes top figure twice as tall as bottom figure
+
+# in the other dimension
+g1 + g2 + plot_layout(ncol = 2, widths = c(1,2))
+
+# adding spacers
+g1 + plot_spacer() + g2
+
+# nested layouts
+g1 + {
+  g2 + {
+    g3 +
+      g4 +
+      plot_layout(ncol = 1)
+  }
+} +
+  plot_layout(ncol = 1)
+
+# - operator for subtrack placement
+g1 + g2 - g3 + plot_layout(ncol = 1)
+
+# using | and /
+
+(g1 | g2 | g3) / g4 + plot_annotation("Title Here",
+caption = "made this patchwork")
+
+# adding tags
+g1 / (g2 | g3) +
+  plot_annotation(tag_levels = "A")
+
+####################################################################
+# multi-panel plots with facet
+
+m1 <- ggplot(data = d) +
+  aes(x = displ, y = cty) +
+  geom_point() + # Could just add facet to this variable as well
+  geom_smooth(method = "lm")
+
+# using facet grid
+m1 + facet_grid(class ~ fl, scales = "free_x") #Defaults to equal scales
+
+# facet for only one variable
+m1 + facet_grid(.~class) # . is placeholder
+
+# facet wrap (doesn't allow you to have a variable as a function of the other but can do them separately)
+m1 + facet_wrap(~class + fl, drop = F) # Notice it stripped non-existent combinations, add drop = F
