@@ -1,0 +1,60 @@
+---
+title: "Homework 7"
+---
+
+```{r, message = FALSE, warning = FALSE}
+data(iris)
+library(dplyr)
+library(tidyverse)
+# Question 1
+str(iris)
+# There are 150 observations and 5 variables
+
+# Question 2
+iris1 <- filter(iris, Species != "setosa" & Sepal.Length>6 & Sepal.Width>2.5)
+str(iris1)
+# There are 56 observations and 5 variables
+
+# Question 3
+iris2 <- select(iris1, Species, Sepal.Length, Sepal.Width)
+str(iris2)
+# There are 56 observations and 3 variables
+
+# Question 4
+iris3 <- arrange(iris2, desc(Sepal.Length))
+print(head(iris3))
+
+# Question 5
+iris4 <- mutate(iris3, Sepal.Area=Sepal.Length*Sepal.Width)
+str(iris4)
+# There are 56 observations and 4 variables
+
+# Question 6
+iris5 <- summarize(iris4, meanSepalLength=mean(Sepal.Length), meanSepalWidth=mean(Sepal.Width), sampleSize=n())
+print(iris5)
+
+# Question 7
+iris6 <- iris4 |>
+    group_by(Species) |>
+    summarize(meanSepalLength=mean(Sepal.Length), meanSepalWidth=mean(Sepal.Width), sampleSize=n())
+print(iris6)
+
+# Question 8
+irisFinal <- iris |>
+    filter(Species != "setosa" & Sepal.Length>6 & Sepal.Width>2.5) |>
+    select(Species, Sepal.Length, Sepal.Width) |>
+    arrange(desc(Sepal.Length)) |>
+    mutate(Sepal.Area=Sepal.Length*Sepal.Width) |>
+    group_by(Species) |>
+    summarize(meanSepalLength=mean(Sepal.Length), meanSepalWidth=mean(Sepal.Width), sampleSize=n())
+print(irisFinal)
+
+# Question 9
+longIris <- iris |>
+    pivot_longer(
+        cols=c(Sepal.Length, Sepal.Width, Petal.Length, Petal.Width),
+        names_to="Measure", values_to="Value"
+    )
+print(head(longIris))
+```
+
