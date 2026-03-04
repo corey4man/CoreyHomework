@@ -1,0 +1,82 @@
+---
+title: "Homework 8"
+---
+
+```{r}
+# Question 1
+
+#Using a for loop, write a function to calculate the number of zeroes in a numeric vector. Before entering the loop, set up a counter variable counter <- 0. Inside the loop, add 1 to counter each time you have a zero in the vector. Finally, use return(counter) for the output.
+
+zeroes <- function(
+    toy = sample(x = rep(0:4, times = 10), size = 10))
+{
+    counter <- 0
+    for(i in 1:length(toy)){
+        num <- toy[i]
+        ifelse(
+            test = num == 0,
+            yes = counter <- counter + 1,
+            no = counter <- counter
+        )
+    }
+    return(counter)
+}
+print(zeroes())
+
+# Question 2
+# Use subsetting instead of a loop to rewrite the function as a single line of code.
+library(dplyr)
+zeroes2 <- function(vec = sample(x = rep(0:4, times = 10), size = 10)){
+results <- subset(vec, vec == 0)
+return(length(results))
+    }
+print(zeroes2())
+
+# Question 3
+# Write a function that takes as input two integers representing the number of rows and columns in a matrix. The output is a matrix of these dimensions in which each element is the product of the row number x the column number.
+
+zeroes3 <- function(x = 3, y = 3){
+ mat <- matrix(nrow = x, ncol = y)
+ xvec <- c(1:x)
+ yvec <- c(1:y)
+ for(i in xvec){
+    for(j in yvec){
+        mat[i,j] <- xvec[i] * yvec[j]
+    }
+ }
+return(mat)
+}
+print(zeroes3())
+
+# Question 4a
+# Simulate a dataset with 3 groups of data, each group drawn from a distribution with a different mean. The final data frame should have 1 column for group and 1 column for the response variable.
+data1 <- rnorm(n = 4, mean = 100)
+data2 <- rnorm(n = 4, mean = 200)
+data3 <- rnorm(n = 4, mean = 300)
+dataset <- c(data1, data2, data3)
+df1 <- data.frame(groups = rep(c("Data1", "Data2", "Data3"), each = 4), response = dataset)
+
+# Question 4b
+# Write a custom function that 1) reshuffles the response variable, and 2) calculates the mean of each group in the reshuffled data. Store the means in a vector of length 3.
+
+shuffler <- function(df = df1){
+    reshuffled <- sample(df$response, size = nrow(df))
+    df2 <- data.frame(groups = df$groups, response = reshuffled)
+    summary <- df2 |>
+         group_by(groups) |>
+        summarize(meanResponse = mean(response))
+    storedMeans <- summary$meanResponse
+return(storedMeans)
+}
+
+shuffler()
+print(shuffler())
+
+# Question 4c
+# Use a for loop to repeat the function in b 100 times. Store the results in a data frame that has 1 column indicating the replicate number and 1 column for each new group mean, for a total of 4 columns.
+emptyDF <- data.frame(replicate = NA, newMean = NA)
+
+for(i in 1:100){
+
+}
+```

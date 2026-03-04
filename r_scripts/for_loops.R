@@ -424,3 +424,38 @@ qplot(x=1:100, y=ran_walk(lambda = .92, noise_sd = 0), geom="line")
 #add some stochasticity back. make lambda > 1
 qplot(x=1:100, y=ran_walk(lambda = 1.01, noise_sd = 10), geom="line")
   
+
+###########################
+# Randomization Tests
+
+library(ggplot2)
+set.seed(1000)
+
+#create treatment groups
+trt_group <- c(rep("Control", 4), rep("Treatment", 5))
+print(trt_group)
+
+#create response variable
+z <- c(runif(4) + 1, runif(5) + 10)
+print(z)
+
+#combine into data frame
+df <- data.frame(trt=trt_group,res=z)
+print(df)
+
+# look at means in observed data
+obs <- tapply(df$res,df$trt,mean)
+print(obs)
+
+# create a simulated data set
+
+# set up a new data frame
+df_sim <- df
+
+# randomize assignment of response to treatment groups
+df_sim$res <- sample(df_sim$res)
+print(df_sim)
+
+#look at means in simulated data
+sim <- tapply(df_sim$res,df$trt,mean)
+print(sim)
