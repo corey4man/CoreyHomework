@@ -74,9 +74,21 @@ print(shuffler())
 
 # Question 4c
 # Use a for loop to repeat the function in b 100 times. Store the results in a data frame that has 1 column indicating the replicate number and 1 column for each new group mean, for a total of 4 columns.
-emptyDF <- data.frame(replicate = NA, newMean = NA)
+newdf <- data.frame(replicate = 1:100,
+group_mean_a = rep(NA, 100),
+group_mean_b = rep(NA, 100),
+group_mean_c = rep(NA, 100))
 
-for(i in 1:100){
-
+for(i in 1:100){temp = shuffler()
+    newdf$group_mean_a[i] = temp[1]
+    newdf$group_mean_b[i] = temp[2]
+    newdf$group_mean_c[i] = temp[3]
 }
+head(newdf)
+# Question 4d
+# Use qplot() to create a histogram of the means for each reshuffled group. Or, if you want a challenge, use ggplot() to overlay all 3 histograms in the same figure. How do the distributions of reshuffled means compare to the original means?
+
+qplot(newdf$group_mean_a)
+qplot(newdf$group_mean_b)
+qplot(newdf$group_mean_c)
 ```
