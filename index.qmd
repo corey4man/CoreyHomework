@@ -22,3 +22,9 @@ a
 
 ## Homework 7
 [Homework 7](Homework7.html)
+
+## Homework 8
+[Homework 8](Homework8.html)
+
+## Homework 9
+[Homework 9](Homework9.html)

@@ -2,7 +2,7 @@
 title: "Homework 8"
 ---
 
-```{r}
+```{r, message = FALSE, warning = FALSE}
 # Question 1
 
 #Using a for loop, write a function to calculate the number of zeroes in a numeric vector. Before entering the loop, set up a counter variable counter <- 0. Inside the loop, add 1 to counter each time you have a zero in the vector. Finally, use return(counter) for the output.
@@ -88,7 +88,32 @@ head(newdf)
 # Question 4d
 # Use qplot() to create a histogram of the means for each reshuffled group. Or, if you want a challenge, use ggplot() to overlay all 3 histograms in the same figure. How do the distributions of reshuffled means compare to the original means?
 
-qplot(newdf$group_mean_a)
-qplot(newdf$group_mean_b)
-qplot(newdf$group_mean_c)
+library(tidyverse)
+
+histoA <- ggplot(
+    data = newdf
+) + geom_histogram(
+    mapping = aes(
+        x = group_mean_a
+    )
+)
+print(histoA)
+
+histoB <- ggplot(
+    data = newdf
+) + geom_histogram(
+    mapping = aes(
+        x = group_mean_b
+    )
+)
+print(histoB)
+
+histoC <- ggplot(
+    data = newdf
+) + geom_histogram(
+    mapping = aes(
+        x = group_mean_c
+    )
+)
+print(histoC)
 ```
