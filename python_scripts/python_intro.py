@@ -84,4 +84,142 @@ mixed[4] = "green"
 mixed.insert(0, "start")
 
 # other methods
-# extend, remove, pop (add to the end), clear (delete)
+# extend, remove, pop (removes and saves removed), clear (delete)
+mixed.pop()
+mixed.append("green")
+mixed.remove("start")
+
+# pop pulls last value from data stack and saves it outside of the stack and you can put it back in later (linear scaled so you can pop out and back in in a loop)
+
+mixed.remove("start")
+last = mixed.pop() # default picks last one
+
+# list comprehensions, like for loops in one line
+
+print(mixed)
+
+[x for x in mixed]
+
+[x for x in mixed if isinstance(x, str)]
+
+###########################################
+# dictionaries
+###########################################
+
+md = {
+    "first":"John", #Key and then value
+    "last":"Smith",
+    "year":2017,
+    "status":"active"
+}
+
+ # above is hardcoding, this is another way to do it using constructor function
+md2 = dict(first = "john", last = "Smith")
+print(md)
+type(md)
+len(md)
+
+# data types within a dictionary
+dataTypes = {
+    "string":"thing",
+    "integer":3,
+    "float":3.14342,
+    "list":[1,2,3,"a"],
+    "boolean":False
+}
+
+# calling values by using key name in brackets
+dataTypes["string"]
+
+# using get instead, built in method
+dataTypes.get("boolean")
+dataTypes.keys()
+dataTypes.values()
+
+# return as a list of tuples
+dataTypes.items()
+
+# add element
+dataTypes["age"] = 36
+dataTypes
+
+# change value within a dictionary
+dataTypes["age"] = 35
+dataTypes
+
+# arrays are like lists of lists, not vectorizable (so can't like multiply them)
+################################################
+# NUMPY (everyone uses Numpy, it's basically part of it now)
+
+arr1 = np.array([0,1,2,3,4,5,6,7,8,9])
+ # array not a method within numpy object, an array function but specifically written in numpy package
+arr1[3]
+arr1[-1]
+arr1[:3]
+arr1[1:5]
+arr1[1:8:3] # gives every 3rd element from 1-8
+
+#2d array
+arr2 = np.array([[1,2,3],[4,5,6],[7,8,9]])
+arr2[2,2]
+arr2[:,2] # gives 3rd element of all lists
+arr2[2,:] # gives 3rd list
+arr2[0:2, 0:2]
+
+#3d array
+arr3 = np.array([[[1,2],[3,4]],[[5,6],[7,8]]]) # list of list of lists
+arr3
+
+# 3d indexing
+arr3[1,0,1] #layer, row, column
+arr3
+
+# querying numpy array: dimensions
+arr1.ndim
+arr2.ndim
+arr3.ndim
+# shape of an array
+arr1.shape
+arr2.shape
+arr3.shape
+
+arr2.dtype
+arr2.astype(str)
+
+# reshaping an array
+arr1.shape
+arr1.reshape(2,5) # made it 2d
+
+# 3d array to 2d
+arr3.shape
+arr3.reshape(4,2)
+
+# combining arrays
+first = np.array([1,2,3])
+second = np.array([4,5,6,7,8,9])
+
+longArray = np.concatenate((first, second))
+
+# select axis for higher dims
+newStack =np.concatenate((arr2, arr2), axis = 0) #will concatenate on first axis, can have as many axes as dimensions
+newStack
+
+# stacking arrays
+newStack = np.stack((arr2, arr2))
+newStack.shape
+
+# splitting arrays
+np.array_split(arr1, 2) # how to split array; into 2 parts
+np.array_split(arr1, 2, axis = 0)
+
+# random numbers
+from numpy import random
+
+random.seed(seed = 100)
+random.randint(50) # value from 0 to 50
+random.rand(50) # like runif, 50 random numbers from 0-1
+random.rand(50, 5, 10) # 5x10 array of 50 random values
+random.choice(arr1) # will give random number from arr1
+random.choice(arr1, size = (3,3)) # pulls randomly from arr1 to make 3x3 matrix
+random.choice([0,1], p = [.3,.7], size = 100) # pulls from 0 and 1 array but 0s pulled with probably of 30%
+
