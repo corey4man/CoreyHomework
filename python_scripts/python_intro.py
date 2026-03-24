@@ -223,3 +223,137 @@ random.choice(arr1) # will give random number from arr1
 random.choice(arr1, size = (3,3)) # pulls randomly from arr1 to make 3x3 matrix
 random.choice([0,1], p = [.3,.7], size = 100) # pulls from 0 and 1 array but 0s pulled with probably of 30%
 
+x = random.normal(loc = 5, scale = 3, size = 200)
+
+plt.hist(x)
+plt.show()
+
+x = random.binomial(n = 10, p = 0.5, size = 30)
+print(x)
+plt.hist(x)
+
+
+x = random.uniform(low = 1, high = 10, size = 50)
+print(x)
+
+# math
+# math b/w arrays, symbols are the same as R
+
+x * 100
+
+arr2 * arr2
+
+np.mean(arr2)
+np.max(arr2)
+
+##########################################################################
+# logic structures
+##########################################################################
+
+# if stat.
+
+a = 6
+
+if a >= 5:
+    print("a is greater than or equal to 5") # notice no parentheses or anything just indentation)
+
+# with else statement
+if a >= 5:
+    print("a is greater than or equal to 5")
+else:
+    print("a is less than 5")
+
+a = 3
+b = 3
+operation = "add"
+
+if operation == "mult":
+    y = a * b
+elif operation == "div": # not else, just adding another if basically
+    y = a / b
+elif operation == "add":
+    y = a + b
+elif operation == "sub":
+    y = a - b
+else:
+    y = "I don't know that operation" # else captures all other possibilities
+
+############################################################
+# LOOPS
+############################################################
+
+l = [10, 20]
+
+for i in range(2):
+    print(l[i])
+
+# loop on an object directly
+x = ["blue", "green", "red"]
+for i in x:
+    print(i)
+
+# a more complicated loop
+rnd = random.uniform(low = 1, high = 5, size = 10)
+
+outList = [] # truly empty list
+
+for i in range(len(arr1)):
+    outList.append(rnd[i] + arr1[i])
+outList
+
+# nested loop with ifelse
+
+rnd2D = random.uniform(low = 0, high = 1, size = (3,3)) # 9 but automatically filled as 3x3 array
+rnd2D
+
+matOut = np.empty(shape = (3,3)) # why does empty matrix repopulate with old array
+matOut
+shp = rnd2D.shape
+
+# nested loop
+for i in range(shp[0]):
+    for j in range(shp[1]):
+
+        if rnd2D[i,j] >= 0.5:
+            matOut[i,j] = rnd2D[i,j] * 1000
+        else:
+            matOut[i,j] = rnd2D[i,j] / 1000
+matOut
+
+
+#####################################################
+# PANDAS DFs
+#####################################################
+# pandas is like dataframes, written in C
+
+dates = pd.date_range("20130101", periods = 6)
+dates # defaulted to days and adds 5 days
+
+df = pd.DataFrame(np.random.randn(6,4), index = dates, columns = list("ABCD")) # index is basically row name
+df
+
+# df methods
+df.head(4)
+df.tail(4)
+df.index
+df.columns
+
+df.describe()
+
+df.to_numpy() # numpy conversion
+
+# indexing into pandas
+df["A"]
+df.loc[:,["A", "B"]]
+df["20130102":"20130104"]
+
+# read in csv file
+ds = pd.read_csv("iris.data.csv")
+ds
+
+ds["sepal_length"] # pulling col out
+
+ds["sepal_area"] = ds.sepal_length * ds.sepal_width # creates new column stored in dataset
+
+# full numeric filter
+df[df>.5] # converted those values to NA, but didn't store
