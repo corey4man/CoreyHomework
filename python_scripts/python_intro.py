@@ -184,7 +184,7 @@ arr2.shape
 arr3.shape
 
 arr2.dtype
-arr2.astype(str)
+arr2.astype(str) # Converts to strings
 
 # reshaping an array
 arr1.shape
@@ -357,3 +357,109 @@ ds["sepal_area"] = ds.sepal_length * ds.sepal_width # creates new column stored 
 
 # full numeric filter
 df[df>.5] # converted those values to NA, but didn't store
+
+
+# ------ DF GROUPING AND SUMMARY ------ #
+
+# Grouping means for two vars
+mean_table = ds.groupby("species")[["petal_length","sepal_length"]].mean()
+
+# long form dataset
+ds_long = pd.melt(ds, id_vars=['species'], value_vars=["sepal_width", "sepal_length", "petal_width", "petal_length"],
+           var_name='vars', value_name='vals') # by species does sepal_width, length etc down
+ds_long
+
+# table with two indexes; species and variable
+mult_indx = ds_long.groupby(["species", "vars"]).mean() # finds means of variables by species
+mult_indx
+
+# pandas pivot
+pd.pivot_table(ds_long, values = "vals", index = ["vars"], columns = ["species"], aggfunc = np.mean)
+# long form goes in, give it values we are aggregating, index variables, and columns for final table, calculate means
+# so now species are columns
+
+# Functions
+
+# basic function structure
+
+####################################################
+# START FUNCTION
+def number_adder(a,b):
+    # PURPOSE: ADD TWO NUMS AND RETURN THE SUM
+    # params: a = numeric, b = numeric
+    # output: numeric sum of a and b
+    out = a + b
+    return(out)
+####################################################
+# END OF FUNCTION
+
+# running number adder
+number_adder(a = 3, b = 6)
+
+
+# a more complex function
+####################################################
+# START FUNCTION
+def number_adder_two(a = None, b = None): # Setting defaults
+    # PURPOSE: ADD TWO NUMS AND RETURN THE SUM
+    # params: a = numeric, b = numeric
+    # output: numeric sum of a and b
+    if a == None or b == None:
+        out = "Please provide inputs for a and b of type numeric."
+    else:
+        out = a + b
+    return(out)
+####################################################
+# END OF FUNCTION
+number_adder_two(a = 6) # But if you give a string for example, you just get an error
+
+# GRAPHICS - seaborn # Looks more like ggplot (default matplotlib graphics don't look as good)
+import seaborn as sns
+
+# common styles: darkgrid, whitegrid, dark, white, ticks
+sns.set_theme(style = "ticks", font_scale = 1.5) # This sets style for whole session
+
+# scatter plot
+
+# species as column
+sns.relplot(
+    data = ds,
+    x = "sepal_width", y = "petal_length",
+    col = "species"
+)
+plt.show()
+
+f = sns.relplot(
+    data = ds,
+    x = "sepal_width", y = "petal_length",
+    style = "species", hue = "species"
+)
+
+f.set_axis_labels("Sepal Width", "Petal Length", labelpad = 10)
+f.legend.set_title("Species")
+
+sns.set_theme(style = "ticks", font_scale = 1.5)
+
+# 'upper right', 'upper left', 'lower left', 'lower right', 'right', 'center left', 'center right', 'lower center', 'upper center', 'center'
+sns.move_legend(
+    f, "right",
+    bbox_to_anchor=(.5,10), ncol = 3, title=None, frameon = False
+)
+
+f = sns.lmplot(
+    data = ds,
+    x = "sepal_width", y = "petal_length",
+    hue = 'species', palette = "bright"
+)
+
+# four panel histogram
+f = sns.displot(
+    ds_long,
+    x = "vals", hue = "species",
+    col = "vars", col_wrap = 2, height = 3, # col wrap makes 2x2
+    kde = True, # kernel density
+)
+
+# bar plot
+sns.catplot(data = ds_long, kind = "bar", x = "species",
+y = "vals", hue = "vars") # default is mean and sd

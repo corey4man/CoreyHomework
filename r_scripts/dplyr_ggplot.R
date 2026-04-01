@@ -68,7 +68,7 @@ summarize(starwarsClean, meanHeight=mean(height)) #Summary only works if there a
 summarize(starwars, meanHeight=mean(height))
 summarize(starwars, meanHeight=mean(height, na.rm=TRUE), TotalNumber=n()) #shows how many rows are factored into the mean
 
-#use group_by() for additional calculations
+ #use group_by() for additional calculations
 starwarsGender <- group_by(starwars, gender)
 summarize(starwarsGender, meanHeight=mean(height,na.rm=TRUE), number=n())
 
