@@ -1,0 +1,60 @@
+---
+title: "Homework 12"
+---
+
+
+```{python}
+# load packages:
+import json
+import pandas as pd
+import plotly.express as px
+import plotly.graph_objects as go
+
+# load data here (gapminder)
+gap = px.data.gapminder().query("year==1997")
+
+# Question 1
+europe = gap.query("continent == 'Europe'")
+fig = px.choropleth(
+    europe,
+    locations = "iso_alpha",
+    color = "gdpPercap",
+    hover_name = "country",
+    hover_data = {
+        "pop":":,",
+        "gdpPercap":":,.0f",
+        "iso_alpha":False
+    },
+    color_continuous_scale="Viridis",
+    title = "GDP Per Cap by country 1997"
+)
+fig.show()
+fig.update_layout(
+    margin = dict(l=0, r=0, t=100, b=0)
+)
+fig.update_geos(
+    scope = "europe"
+)
+# I added a geos argument "scope" to focus in on a specific continent. This focused in on just Europe.
+
+# Question 2
+gap = px.data.gapminder().query("year==1997")
+fig2 = px.scatter_geo(
+    gap,
+    locations = "iso_alpha",
+    color = "continent",
+    hover_name = "country",
+    size = "pop",
+    hover_data = {
+        "pop":":,",
+        "lifeExp":":,.0f",
+        "iso_alpha":False,
+        "continent":False
+    },
+    color_continuous_scale="Viridis",
+    title = "Life expectancy by country 1997"
+)
+fig2.show()
+fig2.update_geos(projection_type="gnomonic")
+# I updated the projection type to be gnomonic. This causes the center to be at the north pole.
+```
