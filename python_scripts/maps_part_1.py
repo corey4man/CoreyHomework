@@ -117,3 +117,53 @@ fig = px.choropleth_map(
 )
 fig.show()
 
+# Density Heat Maps
+eq = pd.read_csv(
+    "https://raw.githubusercontent.com/plotly/datasets/master/earthquakes-23k.csv"
+)
+eq.head()
+
+# focus on a region
+pacific = eq.query("Latitude > -60 and Latitude < 60 and Longitude > 100")
+
+# increased radius after making
+fig = px.density_map(
+    pacific,
+    lat = "Latitude",
+    lon = "Longitude",
+    z = "Magnitude",
+    radius = 12,
+    zoom = 2,
+    center = {"lat":10, "lon":160},
+    map_style = "carto-darkmatter",
+    title = "Global Earthquake Density"
+)
+fig.show()
+
+fig.update_traces(opacity = 0.7)
+
+
+# bubble map
+gap
+
+df=px.data.gapminder()
+
+fig = px.scatter_geo(
+    df,
+    locations = "iso_alpha",
+    color = "continent",
+    hover_name = "country",
+    size = "pop",
+    animation_frame = "year",
+    projection = "natural earth"
+)
+fig.show()
+
+from dash import Dash, dcc, html
+
+app = Dash()
+app.layout = html.Div([
+    dcc.Graph(figure = fig)
+]
+)
+app.run(debug = True, use_reloader = False)
