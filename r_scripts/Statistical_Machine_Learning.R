@@ -11,6 +11,8 @@ library(randomForest) # Random forest
 # Data
 data(iris)
 
+irisdata <- iris
+
 iris_num <- iris[, 1:4]
 iris_species <- iris$Species
 

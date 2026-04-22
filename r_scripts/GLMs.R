@@ -12,7 +12,7 @@ library(lubridate)
 library(lme4)
 library(car)
 
-bee_dat <- read_csv("data/Burnham_field_data_pathogens_wide.csv")
+bee_dat <- read.csv("data/Burnham_field_data_pathogens_wide.csv")
 
 bee_dat <- bee_dat %>%
   mutate(

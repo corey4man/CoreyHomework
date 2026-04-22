@@ -1,0 +1,128 @@
+---
+title: "Homework 14"
+---
+
+
+```{r}
+
+# Question 1 - PCA
+
+# I'm using the mpg dataset to see if you can determine the drivetrain of cars based on the numeric data in the dataset
+
+set.seed(1) # Setting seed
+
+library(ggplot2)
+library(psych)
+library(randomForest)
+
+data <- mpg
+
+mpg_num <- data[,c(3:5, 8:9)]
+
+bart <- cortest.bartlett(cor(mpg_num), n = nrow(mpg_num)) # Running Bartlett's
+bart # Very small p-value so worth pursuing
+
+```
+
+```{r}
+pca <- prcomp(mpg_num, center = TRUE, scale. = TRUE) # Runinng PCA
+summary(pca)
+
+eig <- pca$sdev^2 # Finding eigenvalues
+pve <- eig / sum(eig) # Finding proportion of variance explained
+
+pca_var_table <- data.frame(
+  PC = paste0("PC", 1:length(eig)),
+  Eigenvalue = round(eig, 3),
+  PVE = round(pve, 3),
+  CumPVE = round(cumsum(pve), 3)
+)
+pca_var_table
+
+#PC1 and PC2 explain 90.7% of the variance
+
+plot(eig, type = "b", pch = 19,
+     xlab = "Principal component",
+     ylab = "Eigenvalue",
+     main = "Scree plot (mpg PCA)")
+
+```
+
+```{r}
+broken_stick <- function(p) sapply(1:p, function(k) sum(1/(k:p)) / p) # Running broken stick test
+bs <- broken_stick(ncol(mpg_num))
+bs
+
+retain <- data.frame( # Checking where pve is larger than broken stick values to determine which pcs to use
+  PC = paste0("PC", 1:length(pve)),
+  ObservedPVE = round(pve, 3),
+  BrokenStick = round(bs, 3),
+  Keep = pve > bs
+)
+retain # Tells me to only use PC1, but going to use 2
+
+drivetrain <- data$drv
+scores <- as.data.frame(pca$x)
+scores$drivetrain <- drivetrain # Adding in drivetrain to dataset to see if I can distinguish them
+
+plt <- ggplot(scores, aes(PC1, PC2, color = drivetrain)) +
+  geom_point(size = 2.6, alpha = 0.85) +
+  theme_minimal() +
+  labs(title = "PCA on mpg", subtitle = "PCA is unsupervised; drivetrain used only for coloring")
+
+plt + stat_ellipse() # 95% CI
+
+# You are not able to distinguish drivetrains from each other based on the numerical data
+```
+
+```{r}
+# Running significance test
+man <- manova(cbind(PC1, PC2) ~ drivetrain, data = scores)
+summary(man, test = "Pillai")
+# Although it doesn't appear that way based on the graph, there is a large amount of significance
+
+print(pca$rotation) # Checking to see what variables contributed the most to PC1 and PC2. It looks like engine displacement and number of cylinders contributed the most
+```
+
+
+```{r}
+# Question 2 - Random Forest
+
+set.seed(42)
+id_train <- sample(seq_len(nrow(mpg)), size = 0.7 * nrow(mpg))
+train <- mpg[id_train, ] # Training dataset for training the model
+test  <- mpg[-id_train, ] # Testing dataset
+print(head(train))
+print(head(test))
+
+set.seed(123)
+rf <- randomForest(
+  as.factor(drv)~ ., data = train, # Period means all other data
+  ntree = 500, # Number of trees made based on hardness
+  mtry = 2, # Number of features selected in our bootstrapping 
+  importance = TRUE
+)
+print(rf)
+# My OOB is 7.36%
+# My confusion matrix was pretty successful at classifying on training data
+```
+
+```{r}
+# Now putting new data into same model
+pred <- predict(rf, newdata = test)
+conf <- table(Observed = test$drv, Predicted = pred)
+conf
+# My model was relatively successful on new data
+
+# Checking accuracy
+acc <- mean(pred == test$drv)
+print(acc)
+
+print(importance(rf))
+# Based on mean decrease accuracy the most important variables were hwy and cty
+# Based on GINI the most important variables were hwy and cty, as well
+
+# My data based on PCA and random forest didn't really agree with each other
+
+# I noticed differences in that PCA just takes all of the data you have while random forest takes some of the data you have and tries to use that to predict new data
+```
