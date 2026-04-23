@@ -17,9 +17,11 @@ print(cc1)
 
 # Question 2: Discrete X, Continuous Y
 
+colorschemebox <- c("green", "blue", "purple")
+colorschemeline <- c("red", "orange", "yellow")
 dc1 <- ggplot(data = ds) +
   aes(x = Species, y = Petal.Length) +
-  geom_boxplot(fill = "green", color = "purple")
+  geom_boxplot(fill = colorschemebox, color = colorschemeline)
 
 dc1
 
@@ -46,7 +48,8 @@ summary_data <- data.frame(x_treatment, y_outcome)
 
 dd1 <- ggplot(data = summary_data) +
   aes(x = x_treatment) +
-  geom_bar(aes(fill = as.factor(y_outcome)))
+  geom_bar(aes(fill = as.factor(y_outcome))) +
+  labs(x = "Species", y = "Number of samples with petal count over 4", fill = "True or False")
 
 print(dd1)
 ```

@@ -17,6 +17,8 @@ listWithinList = list1[2][2]
 list1.append(4) # I added a 4 to the end of the original list
 list1.remove(4) # I removed that 4 from the original list
 
+```
+```{python}
 # Question 2
 
 dictionary = {
@@ -36,7 +38,8 @@ dictionary.get("first") # This gives the value of that key
 dictionary["sixth"] = 6
 
 del dictionary["fifth"]
-
+```
+```{python}
 # Question 3
 
 from numpy import random
