@@ -32,8 +32,15 @@ a
 ## Homework 10
 [Homework 10](Homework10.html)
 
+## Homework 11
+[Homework 11](https://corey4man.github.io/CA_SIR_6100/)
+
+![Homework 11 Image](sir%20plot.png)
+
 ## Homework 12
 [Homework 12](Homework12.html)
+
+## Homework 13
 
 ## Homework 14
 [Homework 14](Homework14.html)

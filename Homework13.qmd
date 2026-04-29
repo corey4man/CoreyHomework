@@ -3,10 +3,26 @@ title: "Homework 13"
 ---
 
 ```{r}
+# Question 1
 
+library(tidyverse)
+library(lubridate)
+library(lme4)
 
+starwars
 
+# My question is is there a relationship between height and mass
 
+star_gamma <- lmer(
+  height ~  sex * mass + (1 | skin_color),
+  data = starwars)
+anovagamma <- Anova(star_gamma)
+anovagamma
+# This analysis included a non-Gaussian mixed model with random effects
 
+starplot1 <- ggplot(data = starwars) +
+  aes(x = factor(skin_color), y = mass) +
+  geom_boxplot()
 
+starplot1
 ```
