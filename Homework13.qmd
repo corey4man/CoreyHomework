@@ -8,21 +8,51 @@ title: "Homework 13"
 library(tidyverse)
 library(lubridate)
 library(lme4)
+library(car)
 
-starwars
+sw <- starwars
 
-# My question is is there a relationship between height and mass
+# My question is can you predict height based on sex and mass, with skin color as a random effect. I hypothesize that height will be a strong predictor of both sex and mass.
+cleanstar <- starwars |>
+  filter(mass<1000)
 
 star_gamma <- lmer(
   height ~  sex * mass + (1 | skin_color),
-  data = starwars)
+  data = cleanstar)
 anovagamma <- Anova(star_gamma)
 anovagamma
 # This analysis included a non-Gaussian mixed model with random effects
 
-starplot1 <- ggplot(data = starwars) +
-  aes(x = factor(skin_color), y = mass) +
-  geom_boxplot()
+starplot1 <- ggplot(data = cleanstar) +
+  aes(x = height, y = mass) +
+  geom_point(mapping = aes(
+    color = factor(skin_color), shape = sex
+  )
+  ) + geom_smooth()
 
 starplot1
+
+# I wanted to see if height was a good predictor of sex and mass using skin color as a random factor in the star wars dataset. I used a gamma distribution because I expected the data to be skewed with most characters having a similar height. My results indicate that height is a good predictor of mass but not as good a predictor of sex (although still significant). However, the relationship between sex and mass together is not very strong as a response of height.
+```
+
+```{r}
+# Question 2
+
+# I wanted to see how many of each sex there are and how those sexes line up with gender. I hypothesize that there will be more males in the dataset and males will generally be masculine and females will generally be feminine.
+
+cleanstar <- cleanstar |>
+  mutate(gender_tf = gender == "masculine")
+
+sw_cat_cat <- glm(data = cleanstar, gender_tf~sex,
+family = binomial(link="logit"))
+summary(sw_cat_cat)
+
+starplot2 <- ggplot(data = cleanstar) +
+  aes(x = sex, fill = gender) +
+  geom_bar(mapping = aes(
+  )
+  )
+starplot2
+
+# I used the starwars dataset. Both variables are categorical so I used grouped proportions. From this, my hypothesize was validated. Male characters were always masculine and female characters were feminine. Interestingly, characters with no sex were also always masculine.
 ```

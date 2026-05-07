@@ -41,6 +41,7 @@ a
 [Homework 12](Homework12.html)
 
 ## Homework 13
+[Homework 13](Homework13.html)
 
 ## Homework 14
 [Homework 14](Homework14.html)

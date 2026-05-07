@@ -176,7 +176,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>ndims <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">3</span><span class="sc">:</span><span class="dv">10</span>, <span class="dv">1</span>)</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(ndims)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 4</code></pre>
+<pre><code>[1] 3</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Reshuffling values</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>newdims <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span>(ndims<span class="sc">^</span><span class="dv">2</span>))</span>
@@ -184,37 +184,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>mat1 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">data =</span> newdims, <span class="at">nrow =</span> <span class="fu">sqrt</span>(<span class="fu">length</span>(newdims)))</span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mat1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>     [,1] [,2] [,3] [,4]
-[1,]    6   12    7   13
-[2,]   16    5   15    9
-[3,]    3   11   10   14
-[4,]    4    2    8    1</code></pre>
+<pre><code>     [,1] [,2] [,3]
+[1,]    5    4    6
+[2,]    7    9    8
+[3,]    2    1    3</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Transposing matrix</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>mat1 <span class="ot">&lt;-</span> <span class="fu">t</span>(mat1)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mat1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>     [,1] [,2] [,3] [,4]
-[1,]    6   16    3    4
-[2,]   12    5   11    2
-[3,]    7   15   10    8
-[4,]   13    9   14    1</code></pre>
+<pre><code>     [,1] [,2] [,3]
+[1,]    5    7    2
+[2,]    4    9    1
+[3,]    6    8    3</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(mat1[<span class="dv">1</span>,])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 29</code></pre>
+<pre><code>[1] 14</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(mat1[<span class="dv">1</span>,])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 7.25</code></pre>
+<pre><code>[1] 4.666667</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(mat1[<span class="fu">sqrt</span>(<span class="fu">length</span>(newdims)),])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 37</code></pre>
+<pre><code>[1] 17</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(mat1[<span class="fu">sqrt</span>(<span class="fu">length</span>(newdims)),])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 9.25</code></pre>
+<pre><code>[1] 5.666667</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>eigenmat <span class="ot">&lt;-</span> <span class="fu">eigen</span>(mat1) </span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(eigenmat<span class="sc">$</span>values)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -262,74 +260,74 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>df1[(<span class="fu">sample</span>(<span class="fu">nrow</span>(df1), <span class="at">size =</span> <span class="dv">4</span>, <span class="at">replace =</span> <span class="cn">FALSE</span>)),<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
 <span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>df1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>     my_unis my_letters
-1         NA          V
-2  5.8648173          H
-3  4.6267400          L
-4  1.9921965          M
-5  8.6256746          Y
-6  1.8283712          T
-7  8.1222157          S
-8  8.2153825          O
-9         NA          R
-10 7.6748490          W
-11 4.4227099          D
-12 3.8518894          U
-13 3.7296864          P
-14 7.3504696          G
-15 5.0903414          X
-16 5.9970730          J
-17        NA          K
-18 3.2311857          A
-19 2.0803027          Q
-20 5.6868749          Z
-21 5.7927390          E
-22 0.7126569          F
-23 6.6028004          I
-24        NA          N
-25 9.2295931          B
-26 1.8875225          C</code></pre>
+<pre><code>    my_unis my_letters
+1  9.414251          S
+2  6.578939          U
+3  4.080740          E
+4  6.662315          W
+5        NA          V
+6  2.698313          G
+7  1.436107          I
+8  2.464422          N
+9  9.368006          J
+10 5.027095          L
+11 2.425756          M
+12 2.678222          A
+13       NA          H
+14 7.188499          D
+15 6.255214          X
+16 3.066170          B
+17 9.833571          Z
+18 8.076396          Y
+19       NA          Q
+20 3.732822          R
+21 3.922231          T
+22 8.176226          C
+23       NA          O
+24 8.189784          K
+25 6.672864          F
+26 2.369736          P</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span>(<span class="sc">!</span><span class="fu">complete.cases</span>(df1))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1]  1  9 17 24</code></pre>
+<pre><code>[1]  5 13 19 23</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Putting column 2 in alphabetical order</span></span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>df1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(df1[,<span class="dv">1</span>], <span class="fu">sort</span>(df1[,<span class="dv">2</span>]))</span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>    df1...1. sort.df1...2..
-1         NA              A
-2  5.8648173              B
-3  4.6267400              C
-4  1.9921965              D
-5  8.6256746              E
-6  1.8283712              F
-7  8.1222157              G
-8  8.2153825              H
-9         NA              I
-10 7.6748490              J
-11 4.4227099              K
-12 3.8518894              L
-13 3.7296864              M
-14 7.3504696              N
-15 5.0903414              O
-16 5.9970730              P
-17        NA              Q
-18 3.2311857              R
-19 2.0803027              S
-20 5.6868749              T
-21 5.7927390              U
-22 0.7126569              V
-23 6.6028004              W
-24        NA              X
-25 9.2295931              Y
-26 1.8875225              Z</code></pre>
+<pre><code>   df1...1. sort.df1...2..
+1  9.414251              A
+2  6.578939              B
+3  4.080740              C
+4  6.662315              D
+5        NA              E
+6  2.698313              F
+7  1.436107              G
+8  2.464422              H
+9  9.368006              I
+10 5.027095              J
+11 2.425756              K
+12 2.678222              L
+13       NA              M
+14 7.188499              N
+15 6.255214              O
+16 3.066170              P
+17 9.833571              Q
+18 8.076396              R
+19       NA              S
+20 3.732822              T
+21 3.922231              U
+22 8.176226              V
+23       NA              W
+24 8.189784              X
+25 6.672864              Y
+26 2.369736              Z</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Finding mean of column 1</span></span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(df1[,<span class="dv">1</span>], <span class="at">na.rm =</span> T)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 5.118913</code></pre>
+<pre><code>[1] 5.468985</code></pre>
 </div>
 </div>
 
